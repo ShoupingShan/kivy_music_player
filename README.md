@@ -1,4 +1,4 @@
-#音乐播放器
+# 音乐播放器
 
 ## 1. 简介
   ![surface](/ima/surface.png)
@@ -16,17 +16,21 @@
     8. 动态时间显示
 
 ## 3. 目录
-*Font/*
+
+### **Font/**
 
   保存中文字体（Kivy暂时不支持中文）
 
-*lrc/*
+### **lrc/**
 
   ![lrc](/ima/lrc.png)
 
   保存歌词文件，注意，所有歌词在开始计算时间前有[offset:]标记
+
   ![offset](/ima/offset.jpg)
 
-*music/*
+### **music/**
+
   保存歌曲文件
+
   ![music](/ima/music.png)
