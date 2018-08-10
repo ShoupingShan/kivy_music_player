@@ -14,18 +14,22 @@
     6. 歌词动态显示
     7. 进度条滑块
     8. 动态时间显示
-
+## 2. Install
+    $ sudo add-apt-repository ppa:kivy-team/kivy
+    $ sudo apt-get update
+    $ sudo apt-get install python-kivy
+    $ sudo apt-get install python-pygame
 ## 3. 目录
 
 ### **Font/**
 
-  保存中文字体（Kivy暂时不支持中文）
+  保存中文字体（`Kivy`暂时不支持中文）
 
 ### **lrc/**
 
   ![lrc](/ima/lrc.png)
 
-  保存歌词文件，注意，所有歌词在开始计算时间前有[offset:]标记
+  保存歌词文件，注意，所有歌词在开始计算时间前有`[offset:]`标记
 
   ![offset](/ima/offset.jpg)
 

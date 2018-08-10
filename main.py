@@ -37,6 +37,7 @@ https://kivy.org/docs/api-kivy.core.audio.html
 log = print
 kivy.resources.resource_add_path('Font/')
 font = kivy.resources.resource_find('simkai.ttf')
+
 def file_name(file_dir, Str):
     L = []
     for root, dirs, files in os.walk(file_dir):
@@ -67,21 +68,22 @@ def load_lrc(filename):
     lrc_time = []
     lrc_word = []
     flag = False
-    for lines in open(filename):
-        
-        line = lines.decode('gbk').encode('utf-8')
-        print(line)
-        if 'offset' in line:
-            flag = True
-            continue
-
-        if flag:
-            index = find_s(line, ']')
-            lrc_ = (line[1:index ])
-            if lrc_ == '':
+    with open(filename,'r',1,'gbk') as f:
+        for lines in f:
+            line = lines
+            print(line)
+            if 'offset' in line:
+                flag = True
                 continue
-            lrc_time.append(count_time(lrc_))
-            lrc_word.append(line[(index + 1):(len(line)-1)])
+
+            if flag:
+                index = find_s(line, ']')
+                lrc_ = (line[1:index])
+                if lrc_ == '':
+                    continue
+                lrc_time.append(count_time(lrc_))
+                lrc_word.append(line[(index + 1):(len(line) - 1)])
+
     return lrc_time,lrc_word
 def font_name():
     """
@@ -207,6 +209,8 @@ class MusicPlayerApp(App):
         self.music_play_count = 0
         self.music_list = file_name(music_dir, '.mp3')  #载入歌单以及歌词
         self.lrc_list = file_name(lrc_dir, '.lrc')
+        l = self.lrc_list.sort()
+        m = self.music_list.sort()
         self.filename = self.music_list[self.music_play_count]
         self.lrc_filename = self.lrc_list[self.music_play_count]
         self.lrc_time, self.lrc_word = load_lrc(self.lrc_filename)
