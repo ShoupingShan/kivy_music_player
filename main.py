@@ -1,6 +1,7 @@
 # -*-coding:utf-8-*-
+from __future__ import print_function
 from kivy.app import App
-import load_file_name
+
 from kivy.uix.listview import ListView
 from kivy.uix.gridlayout import GridLayout
 from kivy.config import Config
@@ -19,30 +20,19 @@ from kivy.uix.floatlayout import FloatLayout
 from kivy.core.audio import SoundLoader
 import os
 '''
-本次作业要做一个 播放器 软件, 以后的项目中会把这个软件功能完善, 这只是初步的阶段
 
 为了实现播放声音, 本次引入了一个新的类 SoundLoader
 具体用法很简单, 下面第一行加载声音返回一个类, 第二行调用 play() 方法播放
 audio = SoundLoader.load('mipha.mp3')
 audio.play()        # 播放声音
-
-
 audio.stop()        # 停止播放
 audio.get_pos()     # 当前播放到的时间, 单位是秒, 只有在播放的时候才能获取, 否则是 0
 audio.length        # 声音的长度, 单位是秒
 audio.volume = 1    # 设置/读取音量, 值范围是 0 到 1, 1 是最大音量
 
-详细介绍可以参考官方文档(不建议, 本作业用不着)
+详细介绍可以参考官方文档
 https://kivy.org/docs/api-kivy.core.audio.html
 
-
-界面要求 3 个控件
-1, 显示播放进度的 label, 格式如下(当前时间 分:秒 / 总时间 分:秒)
-    00:00/04:12
-2, 播放按钮
-    开始更新播放进度, 一秒更新一次
-3, 停止按钮
-    停止更新播放进度并且播放进度清零, 声音停止
 '''
 log = print
 kivy.resources.resource_add_path('Font/')
@@ -77,7 +67,10 @@ def load_lrc(filename):
     lrc_time = []
     lrc_word = []
     flag = False
-    for line in open(filename):
+    for lines in open(filename):
+        
+        line = lines.decode('gbk').encode('utf-8')
+        print(line)
         if 'offset' in line:
             flag = True
             continue
